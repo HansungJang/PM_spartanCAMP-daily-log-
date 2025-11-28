@@ -1,0 +1,59 @@
+[# SQL, Subquery and JOIN!] 
+>> 연관데이터 합쳐보자구! 
+
+###실습 (Between 용법 순서 햇갈림)
+'''SELECT 
+    A.restaurant_name, 
+    CASE 
+        WHEN A.avg_price <= 5000  THEN '<= 5,000'
+        WHEN A.avg_price <= 10000 THEN '<= 10,000'
+        WHEN A.avg_price <= 30000 THEN '<= 30,000'
+        ELSE 'Over then 30,000' 
+    END AS "Average price",
+    CASE 
+        WHEN A.avg_age BETWEEN 20      AND 29.9999 THEN '20''s'
+        WHEN A.avg_age BETWEEN 30.0    AND 39.9999 THEN '30''s'
+        WHEN A.avg_age BETWEEN 40.0    AND 49.9999 THEN '40''s'
+        ELSE 'OVER then 50''s' 
+    END AS "Average customers age"
+FROM (
+    SELECT  
+        fo.restaurant_name, 
+        AVG(fo.price) AS avg_price, 
+        AVG(c.age)    AS avg_age
+    FROM food_orders fo 
+    INNER JOIN customers c  
+        ON fo.customer_id = c.customer_id 
+    GROUP BY fo.restaurant_name 
+) AS A
+GROUP BY A.restaurant_name;
+''' 
+
+[#FIGMA, 파운데이션] 
+>> 디자인의 색상, 구성 요소들의 규칙에 대해서 알아보자! 
+(우린 그걸 '파운데이션'이라고 부르기로 했어요)
+
+! 그럼 파운데이션에 뭐가 있는데 크게 (색상, 서체, 간격, 곡률, 그리드, 고도, 아이콘) 등이 있는데
+오늘은 색상에 대해서 찍먹해봄. 
+
+>> 그냥 대충 하나, 둘 고르면 되는거 아닌가>? 아니면 보색? 그런 조합이라던지.... 
+-> 그게 아니였다. UI의 세계는 (규칙)의 세계 너가 마음대로하는 것은 자유이나 <책임져>라는 것에 ㅎㄷㄷ  
+-> 그러니까, 규칙이 필요하답니다. 대표적인 몇가지에 대해서 알았는데요. 
+
+크게 3가지 (primary(=key color), secondary, background) 조합으로 구성이 되요... 
+-> ***primary : 브랜드의 아이덴티티를 나타내는 색상, 주로 버튼, 링크 등에 사용 (10%) 
+-> secondary : primary를 보완하는 색상, 강조 요소나 보조적인 역할 (30%)
+-> background : 콘텐츠를 돋보이게 하는 역할, 주로 배경색으로 사용 (60%)
+1:3:6 비율이라느 것도 배웠지요! 
+
+이런 비율로 색상을 배치하면 시각적으로 중요한 부분이 눈에 두들어지는 UI구성을 할 수 있다는 방법론이 있으니 알아두면 좋겠지요:) 
+-> 물론 이것이 절대적인 정답은 아니에요 ㅎㅎ 
+
+그리고 '팔레트'라는 선택한 색상들의 그라데이션 (-> 유동적인 상황, 명도)에 대해서 대응할 수 있는 요소를 직접 frame을 그려보면서 
+작업하는 시간을 가져보았는데요. Hex코드로 색상을 만든것을 HSL로 바꾸어 명도에 따른 대비 색상을 만들어보기도 하였답니다.... 
+
+디자인에 세계 오늘도 새로운 걸 배우는 시간이 되었네요. .. 
+아직 갈길이 ㅎ 멀지만! 
+
+디자이너들의 고충과 왜? 이런 부분을 작업을 했을까? 이해하는 시간이 되었답니다... 
+1주차 끝! 
